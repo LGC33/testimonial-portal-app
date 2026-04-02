@@ -1,0 +1,175 @@
+{
+  "version": "2",
+  "flowTitle": "Testimonial Submission Handler",
+  "trigger": {
+    "type": "FORM",
+    "displayName": "Form Trigger",
+    "settings": {
+      "description": "",
+      "inputs": [
+        {
+          "id": "name",
+          "title": "Your Name",
+          "description": "Your full name",
+          "type": "short_text"
+        },
+        {
+          "id": "email",
+          "title": "Your Email",
+          "description": "We'll never share your email",
+          "type": "short_text"
+        },
+        {
+          "id": "rating",
+          "title": "Input for rating",
+          "description": "",
+          "type": "static_dropdown",
+          "options": [
+            {
+              "id": "star1",
+              "type": "text",
+              "value": "star1"
+            },
+            {
+              "id": "star2",
+              "type": "text",
+              "value": "star2"
+            },
+            {
+              "id": "star3",
+              "type": "text",
+              "value": "star3"
+            },
+            {
+              "id": "star4",
+              "type": "text",
+              "value": "star4"
+            },
+            {
+              "id": "star5",
+              "type": "text",
+              "value": "star5"
+            }
+          ]
+        },
+        {
+          "id": "appLink",
+          "title": "App Link (Optional)",
+          "description": "Share a link to your app or project",
+          "type": "short_text"
+        },
+        {
+          "id": "permission",
+          "title": "Input for permission",
+          "description": "",
+          "type": "static_dropdown",
+          "options": [
+            {
+              "id": "yes",
+              "type": "text",
+              "value": "yes"
+            },
+            {
+              "id": "no",
+              "type": "text",
+              "value": "no"
+            }
+          ]
+        },
+        {
+          "id": "testimonialText",
+          "title": "Your Testimonial",
+          "description": "Share your experience with us",
+          "type": "long_text"
+        }
+      ],
+      "isEndPageEnabled": false
+    }
+  },
+  "actions": [
+    {
+      "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "valid": false,
+      "displayName": "Save Testimonial to Project",
+      "type": "PIECE",
+      "settings": {
+        "pieceName": "@taskade/automade-internalpiece-taskade",
+        "pieceVersion": "BLANK",
+        "actionName": "task.create",
+        "input": {
+          "fields": {
+            "@app01": {
+              "data": {
+                "value": "{{ trigger['appLink'] }}"
+              },
+              "rank": "Y",
+              "fieldId": "@app01"
+            },
+            "@eml01": {
+              "data": {
+                "value": "{{ trigger[\"email\"] }}"
+              },
+              "rank": "0",
+              "fieldId": "@eml01"
+            },
+            "@img01": {
+              "data": {
+                "value": "{{ trigger[\"imageAttachments\"] }}"
+              },
+              "rank": "1",
+              "fieldId": "@img01"
+            },
+            "@nam01": {
+              "data": {
+                "value": "{{ trigger[\"name\"] }}"
+              },
+              "rank": "2",
+              "fieldId": "@nam01"
+            },
+            "@per01": {
+              "data": {
+                "value": "{{ trigger['permission'] }}"
+              },
+              "rank": "3",
+              "fieldId": "@per01"
+            },
+            "@pho01": {
+              "data": {
+                "value": "{{ trigger[\"photoUrl\"] }}"
+              },
+              "rank": "4",
+              "fieldId": "@pho01"
+            },
+            "@rat01": {
+              "data": {
+                "value": "{{ trigger['rating'] }}"
+              },
+              "rank": "5",
+              "fieldId": "@rat01"
+            },
+            "@sta01": {
+              "data": {
+                "value": "new"
+              },
+              "rank": "6",
+              "fieldId": "@sta01"
+            }
+          },
+          "content": "{{ trigger[\"testimonialText\"] }}",
+          "projectId": {
+            "type": "flow-template-variable-input-type",
+            "id": "C3wC2b2LM4hXLfhQ"
+          }
+        }
+      }
+    }
+  ],
+  "variables": {
+    "C3wC2b2LM4hXLfhQ": {
+      "id": "C3wC2b2LM4hXLfhQ",
+      "rank": "V",
+      "type": "string",
+      "format": "taskade-project-id"
+    }
+  }
+}

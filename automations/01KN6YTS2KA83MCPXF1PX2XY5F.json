@@ -1,0 +1,74 @@
+{
+  "version": "2",
+  "flowTitle": "Testimonial Analysis Generator",
+  "trigger": {
+    "valid": false,
+    "displayName": "When New Testimonial Added",
+    "type": "PIECE_TRIGGER",
+    "settings": {
+      "pieceName": "@taskade/automade-internalpiece-taskade",
+      "pieceVersion": "BLANK",
+      "triggerName": "task.added",
+      "input": {}
+    }
+  },
+  "actions": [
+    {
+      "name": "b2c3d4e5-f678-90ab-cdef-1234567890ab",
+      "valid": true,
+      "displayName": "Analyze New Testimonial",
+      "type": "PIECE",
+      "settings": {
+        "pieceName": "@taskade/automade-internalpiece-openai",
+        "pieceVersion": "BLANK",
+        "actionName": "ai.ask",
+        "input": {
+          "input": "Name: {{ trigger[\"nodeText\"] }}\nRating: Check custom fields\nContent: {{ trigger[\"nodeNote\"] }}",
+          "prompt": "Analyze this testimonial submission and provide a brief summary of the sentiment and key themes. Also suggest if it should be approved for marketing use."
+        }
+      }
+    },
+    {
+      "name": "c3d4e5f6-7890-abcd-ef12-34567890abcd",
+      "valid": false,
+      "displayName": "Mark as Reviewed",
+      "type": "PIECE",
+      "settings": {
+        "pieceName": "@taskade/automade-internalpiece-taskade",
+        "pieceVersion": "BLANK",
+        "actionName": "updateCustomFields",
+        "input": {
+          "fields": {
+            "@dulU6": {
+              "data": {
+                "value": "{{ b2c3d4e5-f678-90ab-cdef-1234567890ab['result'] }}"
+              },
+              "rank": "V",
+              "fieldId": "@dulU6"
+            },
+            "@sta01": {
+              "data": {
+                "value": "reviewed"
+              },
+              "rank": "0",
+              "fieldId": "@sta01"
+            }
+          },
+          "nodeId": "{{ trigger[\"nodeId\"] }}",
+          "projectId": {
+            "type": "flow-template-variable-input-type",
+            "id": "C3wC2b2LM4hXLfhQ"
+          }
+        }
+      }
+    }
+  ],
+  "variables": {
+    "C3wC2b2LM4hXLfhQ": {
+      "id": "C3wC2b2LM4hXLfhQ",
+      "rank": "V",
+      "type": "string",
+      "format": "taskade-project-id"
+    }
+  }
+}
